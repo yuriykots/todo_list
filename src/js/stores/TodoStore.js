@@ -2,13 +2,16 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
+
+// In similar way that we our using jQuery to lined on changes in DOM elements
+// We are using node eventEmitters. They can commit change and our components cann be subscribed to them.
 class TodoStore extends EventEmitter {
   constructor() {
     super()
     this.todos = [
       {
         id: 113464613,
-        text: "Go Shopping",
+        text: "Don't Go Shopping",
         complete: false
       },
       {
@@ -27,7 +30,8 @@ class TodoStore extends EventEmitter {
       text,
       complete: false,
     });
-
+//We are manually emiting change with this function. We can also do it: createTodo.emit("change")
+//But inside constructor we can just do this.emit("change")
     this.emit("change");
   }
 

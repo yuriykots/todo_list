@@ -13,6 +13,8 @@ export default class Featured extends React.Component {
       todos: TodoStore.getAll(),
     };
   }
+// componentWillMount function will add event listener to our component. Whenever component will render
+//for first timey componentWIllMount function will be called. It's a great way to add our event listener.
 
   componentWillMount() {
     TodoStore.on("change", this.getTodos);
@@ -22,6 +24,7 @@ export default class Featured extends React.Component {
     TodoStore.removeListener("change", this.getTodos);
   }
 
+//Updating our state with fresh information from our store.
   getTodos() {
     this.setState({
       todos: TodoStore.getAll(),
