@@ -1,4 +1,4 @@
-import express from "express"
+const express = require("express")
 const bodyParser = require("body-parser")
 const knex = require("knex")
 
@@ -13,14 +13,19 @@ const db = knex({
   }
 })
 
-express()
-  .use(bodyParser.json())
-  .get("/", (req,res) =>{
-    db("users").then((data) => {
-      res.send(data)
-    })
-  })
-  .listen(3000)
+var app = express()
 
+app.use(bodyParser.json())
+app.get("/", (req,res) =>{
+    db("users").then((data) => {
+      res.send("hello bro")
+     })
+  })
+
+
+var PORT = process.env.PORT || 3000
+app.listen(PORT, function() {
+    console.log('Production Express server running at localhost:' + PORT)
+})
 
   //.use(bodyParser.json())
