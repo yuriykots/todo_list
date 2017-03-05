@@ -4,6 +4,7 @@ const knex = require("knex")
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import Layout from './js/Components/Layout'
+import RegisterForm from './js/Components/RegisterForm'
 
 //Now we will configure database connection.
 
@@ -26,6 +27,17 @@ app.get("/", (req,res) =>{
     // really influenced by React Router, so we're just using a little
     // function, `renderPage`
       res.send(renderPage(markup))
+})
+app.get("/register", (req,res) =>{
+      const markup = renderToString(<RegisterForm/>)
+
+    // dump the HTML into a template, lots of ways to do this, but none are
+    // really influenced by React Router, so we're just using a little
+    // function, `renderPage`
+      res.send(renderPage(markup))
+})
+app.post("/login", (req, res, next)=>{
+  res.send("login request received")
 })
 
 /*app.get("/", (req,res) =>{
