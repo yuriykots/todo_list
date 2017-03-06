@@ -1,10 +1,15 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const knex = require("knex")
+//importing library
+const passport = require("passport")
+//importing our file, configuration of password.
+require("./passport")
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import Layout from './js/Components/Layout'
 import RegisterForm from './js/Components/RegisterForm'
+
 
 //Now we will configure database connection.
 
@@ -20,6 +25,9 @@ const db = knex({
 var app = express()
 
 app.use(bodyParser.json())
+app.use(passport.initialize())
+//if u are setting up API and u will not need session. Credential would be passed with every request.
+app.use(passport.session())
 app.get("/", (req,res) =>{
       const markup = renderToString(<Layout/>)
 
